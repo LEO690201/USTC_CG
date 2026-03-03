@@ -1,35 +1,35 @@
-#pragma once
+#pragma once  // 用来防止头文件被多次包含
 
-// interfaces of Dynamic Array class DArray
+// 动态数组类 DArray 的接口声明
 class DArray {
 public:
-	DArray(); // default constructor
-	DArray(int nSize, double dValue = 0); // set an array with default values
-	DArray(const DArray& arr); // copy constructor
-	~DArray(); // deconstructor
+	DArray(); // 默认构造函数
+	DArray(int nSize, double dValue = 0); // 创建并初始化一个带默认值的数组
+	DArray(const DArray& arr); // 拷贝构造函数
+	~DArray(); // 析构函数
 
-	void Print() const; // print the elements of the array
+	void Print() const; // 打印数组中的元素
 
-	int GetSize() const; // get the size of the array
-	void SetSize(int nSize); // set the size of the array
+	int GetSize() const; // 获取数组大小
+	void SetSize(int nSize); // 设置数组大小
 
-	const double& GetAt(int nIndex) const; // get an element at an index
-	void SetAt(int nIndex, double dValue); // set the value of an element
+	const double& GetAt(int nIndex) const; // 获取指定下标处的元素
+	void SetAt(int nIndex, double dValue); // 设置指定元素的值
 
-	double& operator[](int nIndex); // overload operator '[]'
-	const double& operator[](int nIndex) const; // overload operator '[]'
+	double& operator[](int nIndex); // 重载运算符 '[]'
+	const double& operator[](int nIndex) const; // 重载运算符 '[]'
 
-	void PushBack(double dValue); // add a new element at the end of the array
-	void DeleteAt(int nIndex); // delete an element at some index
-	void InsertAt(int nIndex, double dValue); // insert a new element at some index
+	void PushBack(double dValue); // 在数组末尾添加一个新元素
+	void DeleteAt(int nIndex); // 删除指定下标处的元素
+	void InsertAt(int nIndex, double dValue); // 在指定下标处插入一个新元素
 
-	DArray& operator = (const DArray& arr); //overload operator '='
-
-private:
-	double* m_pData; // the pointer to the array memory
-	int m_nSize; // the size of the array
+	DArray& operator = (const DArray& arr); // 重载赋值运算符 '='
 
 private:
-	void Init(); // initilize the array
-	void Free(); // free the array
+	double* m_pData; // 指向数组内存的指针
+	int m_nSize; // 数组大小
+
+private:
+	void Init(); // 初始化数组
+	void Free(); // 释放数组内存
 };

@@ -50,3 +50,6 @@ private:
 private:
     std::list<Term> m_Polynomial; // high degree -> low degree
 };
+
+
+
