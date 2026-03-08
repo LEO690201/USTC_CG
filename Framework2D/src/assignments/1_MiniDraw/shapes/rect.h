@@ -32,6 +32,8 @@ class Rect : public Shape
     // interaction
     void update(float x, float y) override;
 
+    bool is_inside(float x, float y) const override;
+
    private:
     // Coordinates of the top-left and bottom-right corners of the rectangle
     float start_point_x_ = 0.0f, start_point_y_ = 0.0f;

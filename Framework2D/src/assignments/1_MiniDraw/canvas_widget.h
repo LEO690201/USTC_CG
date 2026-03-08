@@ -11,7 +11,7 @@
 namespace USTC_CG
 {
 
-// Canvas class for drawing shapes.
+// Canvas class for drawing shapes. 这里canvas的坐标系是以canvas左上角为原点，x轴向右，y轴向下，canvas中文是布满的意思，画布，画板的意思。
 class Canvas : public Widget
 {
    public:
@@ -29,22 +29,39 @@ class Canvas : public Widget
         kRect = 2,
         kEllipse = 3,
         kPolygon = 4,
+        kFreehand = 5,
+        kSelect = 6, // Added Select Mode
     };
 
     // Shape type setters.
     void set_default();
+    void set_select();
     void set_line();
     void set_rect();
-    // HW1_TODO: more shape types.
+    void set_ellipse();
+    void set_polygon();
+    void set_freehand();
 
     // Clears all shapes from the canvas.
     void clear_shape_list();
+
+    // Undo the last drawn shape.
+    void undo();
 
     // Set canvas attributes (position and size).
     void set_attributes(const ImVec2& min, const ImVec2& size);
 
     // Controls the visibility of the canvas background.
     void show_background(bool flag);
+
+    // Global settings for new shapes
+    float current_line_thickness_ = 2.0f;
+    float current_line_color_[4] = {1.0f, 0.0f, 0.0f, 1.0f};
+    float current_fill_color_[4] = {0.0f, 1.0f, 0.0f, 0.5f};
+    bool current_enable_fill_ = false;
+
+    // Currently selected shape
+    std::shared_ptr<Shape> selected_shape_ = nullptr;
 
    private:
     // Drawing functions.
@@ -53,6 +70,7 @@ class Canvas : public Widget
 
     // Event handlers for mouse interactions.
     void mouse_click_event();
+    void mouse_right_click_event();
     void mouse_move_event();
     void mouse_release_event();
 
