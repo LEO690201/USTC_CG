@@ -81,13 +81,16 @@ void ImageWarping::draw_toolbar()
         ImGui::RadioButton("Fisheye", &warping_type, 0);
         ImGui::RadioButton("IDW", &warping_type, 1);
         ImGui::RadioButton("RBF", &warping_type, 2);
+        ImGui::RadioButton("Dlib Network", &warping_type, 4);
         if (warping_type == 0 && p_image_)
             p_image_->set_fisheye();
         else if (warping_type == 1 && p_image_)
             p_image_->set_IDW();
         else if (warping_type == 2 && p_image_)
             p_image_->set_RBF();
-        // HW2_TODO: You can add more interactions for IDW, RBF, etc.
+        else if (warping_type == 4 && p_image_)
+            p_image_->set_Dlib();
+
         ImGui::Separator();
         if (ImGui::MenuItem("Restore") && p_image_)
         {

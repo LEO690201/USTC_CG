@@ -5,11 +5,11 @@
 
 namespace USTC_CG
 {
-class RBFWarper : public Warper
+class DlibWarper : public Warper
 {
    public:
-    RBFWarper() = default;
-    virtual ~RBFWarper() = default;
+    DlibWarper() = default;
+    virtual ~DlibWarper() = default;
 
     void init(const std::vector<float>& src_x, const std::vector<float>& src_y,
               const std::vector<float>& dst_x, const std::vector<float>& dst_y) override;
@@ -19,12 +19,8 @@ class RBFWarper : public Warper
    private:
     std::vector<float> p_x, p_y;
     std::vector<float> q_x, q_y;
-
-    std::vector<float> alpha_x, alpha_y;
-    float a1_x, a2_x, a3_x;
-    float a1_y, a2_y, a3_y;
-
-    // Helper to solve linear system Ax=b
-    void solve(std::vector<std::vector<float>>& A, std::vector<float>& b, std::vector<float>& x_out);
+    // Dlib models will be encapsulated internally to avoid dragging heavy headers externally
+    void* model_ptr_x = nullptr;
+    void* model_ptr_y = nullptr;
 };
 }  // namespace USTC_CG

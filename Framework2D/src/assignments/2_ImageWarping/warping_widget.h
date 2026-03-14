@@ -23,19 +23,20 @@ class WarpingWidget : public ImageWidget
     void restore();
 
     // Enumeration for supported warping types.
-    // HW2_TODO: more warping types.
     enum WarpingType
     {
         kDefault = 0,
         kFisheye = 1,
         kIDW = 2,
         kRBF = 3,
+        kDlib = 4,
     };
     // Warping type setters.
     void set_default();
     void set_fisheye();
     void set_IDW();
     void set_RBF();
+    void set_Dlib();
 
     // Point selecting interaction
     void enable_selecting(bool flag);

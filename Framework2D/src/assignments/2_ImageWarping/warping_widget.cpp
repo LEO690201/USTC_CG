@@ -1,7 +1,14 @@
 #include "warping_widget.h"
+#include "warper/IDW_warper.h"
+#include "warper/RBF_warper.h"
+#include "warper/Dlib_warper.h"
+#include <annoylib.h>
+#include <kissrandom.h>
 
 #include <cmath>
 #include <iostream>
+#include <memory>
+
 
 namespace USTC_CG
 {
@@ -108,11 +115,6 @@ void WarpingWidget::gray_scale()
 }
 void WarpingWidget::warping()
 {
-    // HW2_TODO: You should implement your own warping function that interpolate
-    // the selected points.
-    // Please design a class for such warping operations, utilizing the
-    // encapsulation, inheritance, and polymorphism features of C++. 
-
     // Create a new image to store the result
     Image warped_image(*data_);
     // Initialize the color of result image
@@ -134,6 +136,11 @@ void WarpingWidget::warping()
             // transfer it to (x', y') in the new image: Note: For this
             // transformation ("fish-eye" warping), one can also calculate the
             // inverse (x', y') -> (x, y) to fill in the "gaps".
+            
+            // For ANN Gap Filling:
+            Annoy::AnnoyIndex<int, float, Annoy::Euclidean, Annoy::Kiss32Random, Annoy::AnnoyIndexSingleThreadedBuildPolicy> index(2);
+            std::vector<std::vector<unsigned char>> mapped_colors;
+            
             for (int y = 0; y < data_->height(); ++y)
             {
                 for (int x = 0; x < data_->width(); ++x)
@@ -149,23 +156,79 @@ void WarpingWidget::warping()
                         std::vector<unsigned char> pixel =
                             data_->get_pixel(x, y);
                         warped_image.set_pixel(new_x, new_y, pixel);
+                        
+                        // Add to ANN index
+                        float pt[2] = {static_cast<float>(new_x), static_cast<float>(new_y)};
+                        index.add_item(mapped_colors.size(), pt);
+                        mapped_colors.push_back(pixel);
                     }
                 }
             }
+            
+            // Build ANN tree
+            index.build(2);
+            
+            // Fill holes
+            for (int y = 0; y < data_->height(); ++y)
+            {
+                for (int x = 0; x < data_->width(); ++x)
+                {
+                    std::vector<unsigned char> cur_color = warped_image.get_pixel(x, y);
+                    if (cur_color[0] == 0 && cur_color[1] == 0 && cur_color[2] == 0 && !mapped_colors.empty())
+                    {
+                        std::vector<int> nearest;
+                        float pt[2] = {static_cast<float>(x), static_cast<float>(y)};
+                        index.get_nns_by_vector(pt, 1, -1, &nearest, nullptr);
+                        if (!nearest.empty()) {
+                            warped_image.set_pixel(x, y, mapped_colors[nearest[0]]);
+                        }
+                    }
+                }
+            }
+            
             break;
         }
         case kIDW:
-        {
-            // HW2_TODO: Implement the IDW warping
-            // use selected points start_points_, end_points_ to construct the map
-            std::cout << "IDW not implemented." << std::endl;
-            break;
-        }
         case kRBF:
+        case kDlib:
         {
-            // HW2_TODO: Implement the RBF warping
-            // use selected points start_points_, end_points_ to construct the map
-            std::cout << "RBF not implemented." << std::endl;
+            std::unique_ptr<Warper> warper;
+            if (warping_type_ == kIDW)
+                warper = std::make_unique<IDWWarper>();
+            else if (warping_type_ == kRBF)
+                warper = std::make_unique<RBFWarper>();
+            else
+                warper = std::make_unique<DlibWarper>();
+
+            std::vector<float> p_x, p_y, q_x, q_y;
+            for (size_t i = 0; i < start_points_.size(); ++i)
+            {
+                p_x.push_back(start_points_[i].x);
+                p_y.push_back(start_points_[i].y);
+                q_x.push_back(end_points_[i].x);
+                q_y.push_back(end_points_[i].y);
+            }
+            warper->init(p_x, p_y, q_x, q_y);
+
+            for (int y = 0; y < data_->height(); ++y)
+            {
+                for (int x = 0; x < data_->width(); ++x)
+                {
+                    float out_x, out_y;
+                    warper->warp(static_cast<float>(x), static_cast<float>(y), out_x, out_y);
+
+                    int src_x = static_cast<int>(std::round(out_x));
+                    int src_y = static_cast<int>(std::round(out_y));
+
+                    if (src_x >= 0 && src_x < data_->width() && src_y >= 0 &&
+                        src_y < data_->height())
+                    {
+                        std::vector<unsigned char> pixel =
+                            data_->get_pixel(src_x, src_y);
+                        warped_image.set_pixel(x, y, pixel);
+                    }
+                }
+            }
             break;
         }
         default: break;
@@ -194,6 +257,10 @@ void WarpingWidget::set_IDW()
 void WarpingWidget::set_RBF()
 {
     warping_type_ = kRBF;
+}
+void WarpingWidget::set_Dlib()
+{
+    warping_type_ = kDlib;
 }
 void WarpingWidget::enable_selecting(bool flag)
 {

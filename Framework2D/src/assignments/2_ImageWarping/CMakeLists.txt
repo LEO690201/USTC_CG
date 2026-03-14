@@ -8,11 +8,17 @@ file(GLOB source
 add_executable(${PROJECT_NAME} ${source})
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-# HW2_TODO(optional): Add Dlib support to the project
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/_deps")
+    target_include_directories(${PROJECT_NAME} PRIVATE _deps)
+endif()
+
+
+# Add Dlib support to the project (optional)
 find_package(dlib QUIET)
 if(dlib_FOUND)
   message(STATUS "Dlib found")
   target_link_libraries(${PROJECT_NAME} PRIVATE dlib::dlib)
+  target_compile_definitions(${PROJECT_NAME} PRIVATE -DUSE_DLIB)
 else()
   message(STATUS "Dlib not found")
 endif()
