@@ -1,4 +1,5 @@
 project(3_PoissonImageEditing)
+find_package(Eigen3 REQUIRED)
 file(GLOB source
   "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/*.h" 
@@ -12,5 +13,5 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY "${BINARY_DIR}"
   LIBRARY_OUTPUT_DIRECTORY "${LIBRARY_DIR}"
   ARCHIVE_OUTPUT_DIRECTORY "${LIBRARY_DIR}") 
-target_link_libraries(${PROJECT_NAME} PUBLIC common) 
+target_link_libraries(${PROJECT_NAME} PUBLIC common Eigen3::Eigen) 
 target_compile_definitions(${PROJECT_NAME} PRIVATE -DDATA_PATH="${FRAMEWORK2D_DIR}/../Homeworks/3_poisson_image_editing/data")

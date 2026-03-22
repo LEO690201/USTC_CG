@@ -14,13 +14,14 @@ class TargetImageWidget : public ImageWidget
     {
         kDefault = 0,
         kPaste = 1,
-        kSeamless = 2
+        kSeamless = 2,
+        kMixGradient = 3
     };
 
     explicit TargetImageWidget(
         const std::string& label,
         const std::string& filename);
-    virtual ~TargetImageWidget() noexcept = default;
+    virtual ~TargetImageWidget();
 
     void draw() override;
     // Bind the source image component
@@ -33,6 +34,7 @@ class TargetImageWidget : public ImageWidget
     // type, you can implement seamless cloning, mix-gradient cloning, etc.
     void set_paste();
     void set_seamless();
+    void set_mix_gradient();
 
     // The clone function
     void clone();
@@ -55,5 +57,8 @@ class TargetImageWidget : public ImageWidget
     ImVec2 mouse_position_;
     bool edit_status_ = false;
     bool flag_realtime_updating = false;
+
+    struct PoissonSolver;
+    std::unique_ptr<PoissonSolver> poisson_solver_;
 };
 }  // namespace USTC_CG

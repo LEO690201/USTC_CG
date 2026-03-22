@@ -139,8 +139,11 @@ void WarpingWidget::warping()
             
             // For ANN Gap Filling:
             Annoy::AnnoyIndex<int, float, Annoy::Euclidean, Annoy::Kiss32Random, Annoy::AnnoyIndexSingleThreadedBuildPolicy> index(2);
-            std::vector<std::vector<unsigned char>> mapped_colors;
+            // 是用于构建一个ANN（Approximate Nearest Neighbor）索引，使用欧几里得距离作为度量标准，Kiss32Random作为随机数生成器，并且采用单线程构建策略。这个索引将用于在图像变形过程中快速找到最近邻的像素点，以填补变形后可能出现的空洞区域
             
+            std::vector<std::vector<unsigned char>> mapped_colors;
+            // 作用是将原图像中的每个像素点映射到新的位置，并记录映射关系以便后续使用ANN进行最近邻搜索填充空洞
+
             for (int y = 0; y < data_->height(); ++y)
             {
                 for (int x = 0; x < data_->width(); ++x)
