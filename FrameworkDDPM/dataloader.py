@@ -17,9 +17,13 @@ def load_transformed_dataset(img_size=256, batch_size=128) -> DataLoader:
 
     # TODO: 你可以更改这两个地方的路径，以实现对其他数据集的加载
     # 当然，你也可以添加更多的参数，以支持不同数据集之间的修改
-    train = torchvision.datasets.ImageFolder(root="./datasets-1/train", transform=data_transform)
+    import os
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    train_dir = os.path.join(current_dir, "datasets-1", "train")
+    test_dir = os.path.join(current_dir, "datasets-1", "test")
+    train = torchvision.datasets.ImageFolder(root=train_dir, transform=data_transform)
 
-    test = torchvision.datasets.ImageFolder(root="./datasets-1/test", transform=data_transform)
+    test = torchvision.datasets.ImageFolder(root=test_dir, transform=data_transform)
 
     dataset = torch.utils.data.ConcatDataset([train, test])
 
