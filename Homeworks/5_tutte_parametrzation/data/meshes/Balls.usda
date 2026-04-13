@@ -1,7 +1,40 @@
 #usda 1.0
 (
     defaultPrim = "Balls"
-    doc = "Blender v4.0.1"
+    doc = """Blender v4.0.1
+
+Generated from Composed Stage of root layer /home/hgl/code/ustc/USTC_CG/Homeworks/5_tutte_parametrzation/data/meshes/Balls.usda
+
+
+Generated from Composed Stage of root layer /home/hgl/code/ustc/USTC_CG/Homeworks/5_tutte_parametrzation/data/meshes/Balls.usda
+
+
+Generated from Composed Stage of root layer /home/hgl/code/ustc/USTC_CG/Homeworks/5_tutte_parametrzation/data/meshes/Balls.usda
+
+
+Generated from Composed Stage of root layer /home/hgl/code/ustc/USTC_CG/Homeworks/5_tutte_parametrzation/data/meshes/Balls.usda
+
+
+Generated from Composed Stage of root layer /home/hgl/code/ustc/USTC_CG/Homeworks/5_tutte_parametrzation/data/meshes/Balls.usda
+
+
+Generated from Composed Stage of root layer /home/hgl/code/ustc/USTC_CG/Homeworks/5_tutte_parametrzation/data/meshes/Balls.usda
+
+
+Generated from Composed Stage of root layer /home/hgl/code/ustc/USTC_CG/Homeworks/5_tutte_parametrzation/data/meshes/Balls.usda
+
+
+Generated from Composed Stage of root layer /home/hgl/code/ustc/USTC_CG/Homeworks/5_tutte_parametrzation/data/meshes/Balls.usda
+
+
+Generated from Composed Stage of root layer /home/hgl/code/ustc/USTC_CG/Homeworks/5_tutte_parametrzation/data/meshes/Balls.usda
+
+
+Generated from Composed Stage of root layer /home/hgl/code/ustc/USTC_CG/Homeworks/5_tutte_parametrzation/data/meshes/Balls.usda
+
+
+Generated from Composed Stage of root layer /home/hgl/code/ustc/USTC_CG/Homeworks/5_tutte_parametrzation/data/meshes/Balls.usda
+"""
     metersPerUnit = 1
     upAxis = "Z"
 )
@@ -12,7 +45,7 @@ def Xform "Balls"
     uniform token[] xformOpOrder = ["xformOp:transform"]
 
     def Mesh "Balls" (
-        prepend apiSchemas = ["MaterialBindingAPI"]
+        apiSchemas = ["MaterialBindingAPI"]
     )
     {
         uniform bool doubleSided = 1
@@ -28,6 +61,10 @@ def Xform "Balls"
             interpolation = "uniform"
         )
         uniform token subdivisionScheme = "none"
+        matrix4d xformOp:transform.timeSamples = {
+            0: ( (1, 0, 0, 0), (0, 0.9999999999999999, 0, 0), (0, 0, 0.9999999999999999, 0), (33.7647819519043, 11.33281987352369, -11.769046881517466, 1) ),
+        }
+        uniform token[] xformOpOrder = ["xformOp:transform"]
     }
 }
 
@@ -42,7 +79,7 @@ def "_materials"
             uniform token info:id = "UsdPreviewSurface"
             float inputs:clearcoat = 0
             float inputs:clearcoatRoughness = 0.03
-            color3f inputs:diffuseColor = (0.8, 0.8, 0.8)
+            color3f inputs:diffuseColor = (0.98039216, 0.96116877, 0.96116877)
             float inputs:ior = 1.45
             float inputs:metallic = 0
             float inputs:opacity = 1
@@ -51,5 +88,33 @@ def "_materials"
             token outputs:surface
         }
     }
+}
+
+def Camera "FreeCamera"
+{
+    float4[] clippingPlanes = []
+    float2 clippingRange = (1, 2000)
+    float focalLength = 50
+    float focusDistance = 10
+    float fStop = 0
+    float horizontalAperture = 20.955
+    float horizontalApertureOffset = 0
+    custom double third_person:distance = 23.053714413865073
+    custom double third_person:pitch = 0.8853472694289475
+    custom double3 third_person:target = (48.24469084501692, 52.88441593568124, 54.62277601951958)
+    custom double third_person:yaw = 1.3008592454302543
+    float verticalAperture = 15.2908
+    float verticalApertureOffset = 0
+    matrix4d xformOp:transform = ( (-0.7071067811865476, 0.7071067811865476, 0, 0), (-0.40824829046386296, -0.40824829046386296, 0.8164965809277259, 0), (0.5773502691896258, 0.5773502691896258, 0.5773502691896258, -0), (5.000000000000002, 5.000000000000001, 5, 1) )
+    matrix4d xformOp:transform.timeSamples = {
+        0: ( (-0.9637876768362166, 0.266670797011312, 2.7755575615628914e-17, 0), (-0.20643916078875885, -0.7461016407288728, 0.6330207062920746, 0), (0.16880813627157126, 0.6100975559064598, 0.7741348625436546, -0), (52.7200935012255, 69.05918264157941, 75.14646223875424, 1) ),
+        2.86899995803833: ( (-0.9637876768362167, 0.2666707970113122, 0, 0), (-0.20643916078875896, -0.7461016407288728, 0.6330207062920747, 0), (0.16880813627157135, 0.6100975559064598, 0.7741348625436547, -0), (52.13634540935855, 66.94943075414585, 72.46946005841771, 1.0000000000000002) ),
+    }
+    uniform token[] xformOpOrder = ["xformOp:transform"]
+}
+
+def "NodeGraph"
+{
+    custom string node_json = '{"links_info":{"14":{"EndPinID":10,"ID":14,"StartPinID":5},"15":{"EndPinID":7,"ID":15,"StartPinID":13},"16":{"EndPinID":11,"ID":16,"StartPinID":5}},"nodes_info":{"1":{"ID":1,"id_name":"read_usd","inputs":{"0":2,"1":3,"2":4},"outputs":{"0":5}},"6":{"ID":6,"id_name":"write_usd","inputs":{"0":7,"1":8},"outputs":null},"9":{"ID":9,"id_name":"hw5_param","inputs":{"0":10,"1":11,"2":12},"outputs":{"0":13}}},"sockets_info":{"10":{"ID":10,"id_name":"Ruzino::Geometry","identifier":"Geometry","in_out":1,"optional":false,"ui_name":"Geometry"},"11":{"ID":11,"id_name":"Ruzino::Geometry","identifier":"Reference Geometry","in_out":1,"optional":false,"ui_name":"Reference Geometry"},"12":{"ID":12,"id_name":"std::__cxx11::basic_string<char>","identifier":"Weight Type","in_out":1,"optional":false,"ui_name":"Weight Type","value":""},"13":{"ID":13,"id_name":"Ruzino::Geometry","identifier":"Geometry","in_out":0,"optional":false,"ui_name":"Geometry"},"2":{"ID":2,"id_name":"std::__cxx11::basic_string<char>","identifier":"File Name","in_out":1,"optional":false,"ui_name":"File Name","value":"/home/hgl/code/ustc/USTC_CG/Homeworks/5_tutte_parametrzation/data/Balls.usda"},"3":{"ID":3,"id_name":"std::__cxx11::basic_string<char>","identifier":"Prim Path","in_out":1,"optional":false,"ui_name":"Prim Path","value":"/Balls/Balls"},"4":{"ID":4,"id_name":"float","identifier":"Time Code","in_out":1,"optional":false,"ui_name":"Time Code","value":0.0},"5":{"ID":5,"id_name":"Ruzino::Geometry","identifier":"Geometry","in_out":0,"optional":false,"ui_name":"Geometry"},"7":{"ID":7,"id_name":"Ruzino::Geometry","identifier":"Geometry","in_out":1,"optional":false,"ui_name":"Geometry"},"8":{"ID":8,"id_name":"std::__cxx11::basic_string<char>","identifier":"Sub Path","in_out":1,"optional":true,"ui_name":"Sub Path","value":""}},"nodes":{"node:1":{"location":{"x":-104,"y":62}},"node:6":{"location":{"x":568,"y":350}},"node:9":{"location":{"x":280,"y":118}}},"selection":null,"view":{"scroll":{"x":-114.880195617675781,"y":-1.99027681350708008},"visible_rect":{"max":{"x":881.673828125,"y":579.0003662109375},"min":{"x":-115.476661682128906,"y":-2.0006103515625}},"zoom":0.994834780693054199}}'
 }
 

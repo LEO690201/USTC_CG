@@ -1,7 +1,10 @@
 #usda 1.0
 (
     defaultPrim = "Nefertiti_face"
-    doc = "Blender v4.0.1"
+    doc = """Blender v4.0.1
+
+Generated from Composed Stage of root layer /home/hgl/code/ustc/USTC_CG/Homeworks/5_tutte_parametrzation/data/meshes/NefertitiFace.usda
+"""
     metersPerUnit = 1
     upAxis = "Z"
 )
@@ -12,7 +15,7 @@ def Xform "Nefertiti_face"
     uniform token[] xformOpOrder = ["xformOp:transform"]
 
     def Mesh "Nefertiti_face" (
-        prepend apiSchemas = ["MaterialBindingAPI"]
+        apiSchemas = ["MaterialBindingAPI"]
     )
     {
         uniform bool doubleSided = 1
@@ -51,5 +54,27 @@ def "_materials"
             token outputs:surface
         }
     }
+}
+
+def Camera "FreeCamera"
+{
+    float4[] clippingPlanes = []
+    float2 clippingRange = (1, 2000)
+    float focalLength = 50
+    float focusDistance = 10
+    float fStop = 0
+    float horizontalAperture = 20.955
+    float horizontalApertureOffset = 0
+    custom double third_person:distance = 13.171999163528
+    custom double third_person:pitch = 1.3704615136495266
+    custom double3 third_person:target = (0.000010978273899869828, 0.000024758985945005918, -0.00000392491885037316)
+    custom double third_person:yaw = -1.6569704977703317
+    float verticalAperture = 15.2908
+    float verticalApertureOffset = 0
+    matrix4d xformOp:transform = ( (0.9962893032802439, -0.08606755584635843, 1.3877787807814454e-17, 0), (0.08434620522916517, 0.976363522999392, 0.19899745882712913, 0), (-0.017127224900887365, -0.1982590396094195, 0.9800000058062983, 0), (-0.22558881379414436, -2.611443144911196, 12.908555331819146, 1) )
+    matrix4d xformOp:transform.timeSamples = {
+        0: ( (0.9947969960803953, 0.10187706606210128, -3.4694469519536136e-17, 0), (-0.09081576836639149, 0.8867869586325605, 0.45316816549183514, -0), (0.046167443133052974, -0.45081032975054103, 0.8914250466442842, 0), (0.4073668333794483, -5.137015818174415, 12.022895418219337, 1) ),
+    }
+    uniform token[] xformOpOrder = ["xformOp:transform"]
 }
 

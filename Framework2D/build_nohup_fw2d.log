@@ -1,0 +1,32 @@
+nohup: 忽略输入
+make: 进入目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+make[1]: 进入目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+make[2]: 进入目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+make[2]: 进入目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+make[2]: 离开目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+[  2%] Built target glad
+make[2]: 离开目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+[ 53%] Built target glfw
+make[2]: 进入目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+make[2]: 离开目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+[ 63%] Built target imgui
+make[2]: 进入目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+make[2]: 离开目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+[ 67%] Built target common
+make[2]: 进入目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+make[2]: 进入目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+make[2]: 进入目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+make[2]: 进入目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+make[2]: 进入目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+make[2]: 离开目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+make[2]: 离开目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+make[2]: 离开目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+[ 69%] Built target demo_hello_world
+make[2]: 离开目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+make[2]: 离开目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+[ 79%] Built target demo
+[ 82%] Built target 1_MiniDraw
+[ 90%] Built target 3_PoissonImageEditing
+[100%] Built target 2_ImageWarping
+make[1]: 离开目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”
+make: 离开目录“/home/hgl/code/ustc/USTC_CG/Framework2D/build”

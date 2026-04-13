@@ -1,0 +1,8 @@
+-- Started CMake for USTC_CG_2025_Framework2D v1.0...
+
+-- Including Wayland support
+-- Including X11 support
+-- Dlib found
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/hgl/code/ustc/USTC_CG/Framework2D/build

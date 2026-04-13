@@ -1,7 +1,13 @@
 #usda 1.0
 (
     defaultPrim = "Bunny_head"
-    doc = "Blender v4.0.1"
+    doc = """Blender v4.0.1
+
+Generated from Composed Stage of root layer /home/hgl/code/ustc/USTC_CG/Homeworks/5_tutte_parametrzation/data/meshes/BunnyHead.usda
+
+
+Generated from Composed Stage of root layer /home/hgl/code/ustc/USTC_CG/Homeworks/5_tutte_parametrzation/data/meshes/BunnyHead.usda
+"""
     metersPerUnit = 1
     upAxis = "Z"
 )
@@ -24,6 +30,32 @@ def Xform "Bunny_head"
             interpolation = "uniform"
         )
         uniform token subdivisionScheme = "none"
+        matrix4d xformOp:transform.timeSamples = {
+            0: ( (1, 0, 0, 0), (0, 0.9999999999999999, 0, 0), (0, 0, 0.9999999999999999, 0), (0.38767895102500916, 1.561593703869682e-8, -0.20683935284614444, 1) ),
+        }
+        uniform token[] xformOpOrder = ["xformOp:transform"]
     }
+}
+
+def Camera "FreeCamera"
+{
+    float4[] clippingPlanes = []
+    float2 clippingRange = (1, 2000)
+    float focalLength = 50
+    float focusDistance = 10
+    float fStop = 0
+    float horizontalAperture = 20.955
+    float horizontalApertureOffset = 0
+    custom double third_person:distance = 8.660254037844387
+    custom double third_person:pitch = 0.6154797086703873
+    custom double3 third_person:target = (-3.3654908596753765, -3.3654908596753765, -3.3654908596753756)
+    custom double third_person:yaw = 0.7853981633974483
+    float verticalAperture = 15.2908
+    float verticalApertureOffset = 0
+    matrix4d xformOp:transform = ( (-0.7071067811865476, 0.7071067811865476, 0, 0), (-0.40824829046386296, -0.40824829046386296, 0.8164965809277259, 0), (0.5773502691896258, 0.5773502691896258, 0.5773502691896258, -0), (5.000000000000002, 5.000000000000001, 5, 1) )
+    matrix4d xformOp:transform.timeSamples = {
+        0: ( (-0.7071067811865474, 0.7071067811865475, 0, 0), (-0.40824829046386285, -0.4082482904638628, 0.8164965809277257, 0), (0.5773502691896257, 0.5773502691896256, 0.5773502691896257, -0), (1.6345091403246246, 1.6345091403246241, 1.6345091403246246, 0.9999999999999998) ),
+    }
+    uniform token[] xformOpOrder = ["xformOp:transform"]
 }
 
